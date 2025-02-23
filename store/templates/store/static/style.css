@@ -1,0 +1,110 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body with green theme */
+body {
+    font-family: "Times New Roman", serif;
+    background-color: #e6ffe6; /* Light green */
+    color: #004d00; /* Dark green */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: 250px auto;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 128, 0, 0.4);
+}
+
+/* Header */
+header {
+    grid-area: header;
+    background: linear-gradient(to right, #008000, #32CD32); /* Gradient Green */
+    color: white;
+    text-align: center;
+    padding: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Sidebar */
+.sidebar {
+    grid-area: sidebar;
+    background: linear-gradient(to bottom, #32CD32, #228B22); /* Gradient Sidebar */
+    padding: 20px;
+    border-radius: 0 0 0 10px;
+    box-shadow: inset -3px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 15px;
+    background: #006400; /* Dark Green Buttons */
+    display: block;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar ul li a:hover {
+    background: #004d00; /* Even Darker Green */
+    transform: scale(1.05);
+}
+
+/* Main content */
+.main {
+    grid-area: main;
+    background: #ccffcc; /* Light Green */
+    padding: 30px;
+    border-radius: 0 0 10px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: inset 3px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    grid-area: footer;
+    background: linear-gradient(to right, #006400, #228B22); /* Dark Green Gradient */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.3);
+}

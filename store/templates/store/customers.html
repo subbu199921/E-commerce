@@ -1,0 +1,142 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers - Subhash.Buy</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Pink Theme Layout */
+        body {
+            background-color: #ffe6f2; /* Light Pink */
+            color: #4d0019; /* Dark Pink/Maroon */
+            font-family: "Arial", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: #ffcce6; /* Lighter Pink */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 6px 12px rgba(128, 0, 64, 0.3); /* Soft Darker Pink Shadow */
+        }
+
+        header {
+            background: linear-gradient(to right, #800040, #FF69B4); /* Pink Gradient */
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow for header */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 6px 12px rgba(128, 0, 64, 0.1); /* Light Shadow */
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #FFB6C1; /* Light pink border */
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #FF69B4; /* Hot Pink header */
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #ffe1f0; /* Very light pink on hover */
+            transform: scale(1.02);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Style for the order list within the table */
+        td ul {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        td ul li {
+            margin-bottom: 8px; /* Add spacing between orders */
+            font-size: 14px;
+            color: #4d0019; /* Dark Pink */
+        }
+
+        /* Icon styles for Name and Email */
+        .icon {
+            color: #FF69B4;
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        /* Responsive table styling */
+        @media screen and (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Customers List</h1>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Orders</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td><i class="fas fa-user icon"></i>{{ customer.name }}</td>
+                    <td><i class="fas fa-envelope icon"></i>{{ customer.email }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td>
+                        <ul>
+                            {% for order in customer.order_set.all %}
+                            <li>Order {{ order.id }} - Status: {{ order.status }}</li>
+                            {% empty %}
+                            <li>No orders yet</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No customers available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

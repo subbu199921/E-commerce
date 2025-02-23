@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Subhash.Buy</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* Pink and Green Theme Layout */
+        body {
+            background-color: #ffe6f2; /* Light Pink */
+            color: #4d0019; /* Dark Pink/Maroon */
+            font-family: "Arial", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: #ffcce6; /* Lighter Pink */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(128, 0, 64, 0.2); /* Soft Darker Pink Shadow */
+        }
+
+        header {
+            background: linear-gradient(to right, #800040, #FF69B4); /* Pink Gradient */
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Light Shadow for header */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 6px 12px rgba(128, 0, 64, 0.1); /* Soft Shadow */
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #FFB6C1; /* Light pink border */
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #FF69B4; /* Hot Pink header */
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #ffe1f0; /* Very light pink on hover */
+            transform: scale(1.02);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Style for the product list within the table */
+        td ul {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        td ul li {
+            margin-bottom: 10px; /* More spacing between products */
+            font-size: 14px;
+            color: #4d0019; /* Dark Pink */
+        }
+
+        td ul li:last-child {
+            margin-bottom: 0; /* No margin for the last item */
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #FF69B4; /* Hot Pink price */
+        }
+
+        /* Responsive table styling */
+        @media screen and (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Orders List</h1>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Products</th>
+                    <th>Status</th>
+                    <th>Ordered At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer.name }}</td>
+                    <td>
+                        <ul>
+                            {% for product in order.products.all %}
+                            <li>{{ product.name }} - <span class="product-price">${{ product.price }}</span></li>
+                            {% empty %}
+                            <li>No products in this order</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.ordered_at }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No orders available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
