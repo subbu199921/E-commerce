@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Product, Customer, Cart, Order
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+
 
 # Home page view
 def home(request):
@@ -24,3 +27,17 @@ def cart(request):
 def orders(request):
     orders = Order.objects.all()
     return render(request, 'store/orders.html', {'orders': orders})
+
+def buy_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    # Check if the product is in stock
+    if product.stock > 0:
+        product.stock -= 1  # Reduce stock by 1
+        product.save()      # Save the updated product
+        messages.success(request, f"Your order for '{product.name}' was placed successfully! 🎉")
+    else:
+        messages.error(request, f"Sorry, '{product.name}' is out of stock.")
+
+    # Redirect back to the products page
+    return redirect('products')
