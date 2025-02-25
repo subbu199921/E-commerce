@@ -41,3 +41,8 @@ def buy_product(request, product_id):
 
     # Redirect back to the products page
     return redirect('products')
+
+
+def orders_page(request):
+    orders = Order.objects.all().order_by('-ordered_at')
+    return render(request, 'orders.html', {'orders': orders})
